@@ -22,7 +22,14 @@ class ListsController < ApplicationController
   end
 
   def edit
+    @list = List.find(params[:id]) #投稿済みのデータを編集するため、保存されているデータが必要＝findメソッド
   end
+  
+  def update #更新機能のためのアクション #viewに表示させる必要がないためローカル変数
+    list = List.find(params[:id]) #投稿済みのデータを編集するため、保存されているデータが必要＝findメソッド
+    list.update(list_params) #ストロングパラメータ
+    redirect_to list_path(list.id) #showアクションにリダイレクトするため名前付きルートを使用
+  end 
   
   private #コントローラのみで実装
   # ストロングパラメータ
