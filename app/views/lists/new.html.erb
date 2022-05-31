@@ -1,9 +1,25 @@
 <h1>新規投稿</h1>
-<%= form_with model:@list do |f| %> <!--通常@で変数に変える--->
+
+<% if @list.errors.any? %> <!--errorsはモデルにバリデーションを実装したときに発生したエラーの内容を確認、any? でエラーが発生しているかどうか-->
+  <%= @list.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @list.errors.full_messages.each do |message| %> <!--full_messagesはエラーの内容を出力（エラー文は配列で保存されているためeach）-->
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with model:@list,url:'/lists' do |f| %> <!--通常@で変数に変える--->
 <h4>タイトル</h4>
+
 <%= f.text_field :title %> 
 <h4>本文</h4>
 <%= f.text_area :body %>
+
+<h4>画像</h4>
+<%= f.file_field :image, accept: "image/*" %> <!--画像投稿のための記述-->
+<!--file_field=ファイルの投稿する（全てのファイル対象）であるため、画像のみにするためaccept: "image/*"で画像のみ投稿できるようにする-->
+
 <%= f.submit "投稿" %>
 
 <% end %>

@@ -1,4 +1,20 @@
-<h1>新規投稿一覧</h1>
+<div class="list-wrap">
+<% @lists.each do |list| %>
+  <div class="list-box">
+    <% if list.image.attached? %>
+      <%= image_tag list.image, size: "200x200" %>
+    <% else %>
+      <%= image_tag 'no_image', size: "200x200" %>
+    <% end %>
+    <div class="list-comment">
+      <span class="list-body"><%= list.body %></span> <!--list.bodyはListモデルのbodyカラムに入っているデータを呼び出している-->
+      <span class="list-title"><%=link_to list.title, list_path(list.id) %></span>
+    </div>
+  </div>
+<% end %>
+</div>
+
+<h1>投稿一覧</h1>
 
  <% @lists.each do |list| %> <!--eachメソッド＝@lists.eachと記述することで、Listレコードの数だけ繰り返し処理を行う（＝不要）-->
  
@@ -6,5 +22,14 @@
 <span>
     <%= link_to list.title, list_path(list.id) %>　<!--link_to 表示させるテキスト, リンク先URL[,オプション]--><!--今回はidカラム-->
 </span>　<!--listで取り出したいtitle-->
+<p>画像</p>
+<% if list.image.attached? %>
+<!--list.image.attached?=list.imageに対して.attached?というimageが存在するかを確認する-->
+    <%= image_tag list.image, size: "200x200" %>
+<!--HTMLのimgタグを生成するimage_tagヘルパーを使い、画像の表示-->
+<% else %>
+    <%= image_tag 'no_image', size: "200x200" %>
+<% end %>
 
 <% end %>
+
