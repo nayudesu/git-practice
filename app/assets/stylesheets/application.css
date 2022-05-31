@@ -85,10 +85,21 @@ main {
 }
 
 .list-body {
+  display: block; /*displayは要素の種類を指定できるプロパティ,*/
+  
   color: gray;
   font-size: 12px;
+  overflow: hidden;
+  white-space: nowrap; /*white-space: nowrap;は,テキストを折り返し表示させないようにするプロパティ*/
+  text-overflow: ellipsis; /*text-overflow: ellipsis;は、領域をはみ出したテキストを...で省略表示するプロパティ*/
 }
 
 .list-title {
+  display: block;
+  
   font-size: 18px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
 }
